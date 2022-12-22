@@ -6,6 +6,10 @@ const session = require("express-session");
 const mongoDBSession = require("connect-mongodb-session")(session);
 const { cleanUpAndValidate } = require("./utils/AuthUtils");
 const UserSchema = require("./UserSchema");
+const cors = require("cors");
+const helmet = require("helmet");
+
+const PORT = process.env.PORT || 8000;
 
 // Import Models
 const TodoModel = require("./Models/TodoModel");
@@ -38,6 +42,7 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(helmet());
 
 //Adding the session
 const store = new mongoDBSession({
@@ -420,8 +425,8 @@ app.post("/read-items", isAuth, async (req, res) => {
   }
 });
 
-app.listen(8000, () => {
-  console.log("Listenning on port 8000");
+app.listen(PORT, () => {
+  console.log(`Listenning on port ${PORT}`);
 });
 
 //Create basic template for form with ejs
