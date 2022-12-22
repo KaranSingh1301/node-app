@@ -12,7 +12,7 @@ const helmet = require("helmet");
 const PORT = process.env.PORT || 8000;
 
 // Import Models
-const TodoModel = require("./Models/TodoModel");
+const TodoModel = require("./models/TodoModel");
 
 //Import Middleware
 const isAuth = require("./middlerware/isAuth");
